@@ -2,8 +2,15 @@ import { useState } from "react";
 import { searchBoxIcons } from "src/data/constants";
 import Tooltip from "src/components/common/tooltip";
 import { AiOutlineSearch } from "react-icons/ai";
+import { useTranslation } from "react-i18next";
 
-export default function SearchBox() {
+interface SearchBoxProps {
+  handleSearch: (searchText: string) => void;
+}
+
+export default function SearchBox({ handleSearch }: SearchBoxProps) {
+  const [t] = useTranslation();
+
   const [searchText, setSearchText] = useState("");
   const [stretch, setStretch] = useState(false);
 
@@ -15,6 +22,10 @@ export default function SearchBox() {
     setStretch(false);
   };
 
+  const handleInputChange = (movieName: string) => {
+    setSearchText(movieName);
+  };
+
   return (
     <div
       className={`flex justify-between items-center border border-gray-200 shadow-md rounded-full px-4 transition-all duration-500 ${
@@ -23,21 +34,21 @@ export default function SearchBox() {
     >
       {stretch && <AiOutlineSearch className="text-gray-300" size={25} />}
       <input
+        placeholder={t("header.searchPlaceholder") || ""}
         type="text"
         className="w-full bg-transparent focus:outline-0 px-4"
         value={searchText}
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
-        onChange={(e) => setSearchText(e.target.value)}
+        onChange={(e) => handleInputChange(e.target.value)}
       />
       {searchBoxIcons.map((icon, index) => (
-        <Tooltip text={icon.toolTipText} isSearchIcon={true}>
+        <Tooltip key={index} text={icon.toolTipText} isSearchIcon={true}>
           <button
-            key={index}
             className="flex items-center m-2 rounded-lg"
-            onClick={icon.functionHandler}
+            onFocus={() => handleSearch(searchText)}
           >
-            <img src={icon.icon} alt="Search-icon" className="w-10" />
+            <img src={icon.icon} alt="Search icon" className="w-10" />
           </button>
         </Tooltip>
       ))}

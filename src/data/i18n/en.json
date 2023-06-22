@@ -1,3 +1,50 @@
 {
-  "language": "English"
+  "language": "English",
+  "about": {
+    "title": "About",
+    "emptyList": "none",
+    "recommendations": "People also search for:",
+    "characters": "Characters",
+    "productionCompanies": "Production companies",
+    "directors": "Directors"
+  },
+  "header": {
+    "searchPlaceholder": "search for a movie",
+    "filters": "All filters ▾",
+    "tools": "Tools",
+    "safeSearch": "SafeSearch on",
+    "resultsNumber": "About 2,040,000,000 results (0.60 seconds)",
+    "filmSeries": "Film Series"
+  },
+  "overview": {
+    "movies": "Movies",
+    "cast": "Cast"
+  },
+  "tooltip": {
+    "searchVoice": "Search by voice",
+    "searchImage": "Search by image",
+    "search": "Search",
+    "quickSettings": "Quick settings",
+    "googleApps": "Google apps",
+    "googleAccount": "Google Account"
+  },
+  "categories": {
+    "images": "Images",
+    "videos": "Videos",
+    "news": "News",
+    "cast": "Cast",
+    "releaseDate": "Release date",
+    "netflix": "Netflix",
+    "imdb": "IMDb"
+  },
+  "tabs": {
+    "overview": "Overview",
+    "movies": "Movies",
+    "cast": "Cast",
+    "trailers": "Trailers"
+  },
+  "buttons": {
+    "seeMore": "See more  →",
+    "more": ", MORE"
+  }
 }

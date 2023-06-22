@@ -1,17 +1,20 @@
-const currentLang = localStorage.getItem("locale") || "en";
+import { LANGUAGES } from "src/data/enums";
+
+const currentLang = localStorage.getItem("locale") || LANGUAGES.EN;
 
 export const changeLang = () => {
-  const switchedLang = currentLang === "ar" ? "en" : "ar";
+  const switchedLang =
+    currentLang === LANGUAGES.AR ? LANGUAGES.EN : LANGUAGES.AR;
   localStorage.setItem("locale", switchedLang);
   window.location.reload();
 };
 
 export const getDirection = () => {
-  if (currentLang === "en") return "ltr";
+  if (currentLang === LANGUAGES.EN) return "ltr";
   else return "rtl";
 };
 
-export const getLang = () => localStorage.getItem("locale") || "en";
+export const getLang = () => localStorage.getItem("locale") || LANGUAGES.EN;
 
 export const handleSearch = () => {
   // Perform search logic here

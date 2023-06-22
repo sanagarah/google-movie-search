@@ -1,8 +1,8 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
-import en from "./en.json";
-import ar from "./ar.json";
+import en from "src/data/i18n/en.json";
+import ar from "src/data/i18n/ar.json";
 
 const resources = {
   en: {
@@ -25,7 +25,7 @@ i18n.use(initReactI18next).init({
   },
 });
 
-export function translateCell(cell: any) {
+export function translateCell(cell: string) {
   return i18n.t(cell);
 }
 

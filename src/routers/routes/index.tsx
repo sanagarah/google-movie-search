@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ComponentType, ReactElement } from "react";
 import { Suspense } from "react";
 import {
   getCastPath,
@@ -6,16 +6,18 @@ import {
   getMoviesPath,
   getOverviewPath,
   getTrailersPath,
-} from "../paths";
+} from "src/routers/paths";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import MovieSearchLayout from "../../components/layouts/movie-search-layout";
+import MovieSearchLayout from "src/components/layouts/movie-search-layout";
 
-const OverviewPage = React.lazy(() => import("src/components/pages/overview"));
+const OverviewContainer = React.lazy(
+  () => import("src/components/containers/overview-container")
+);
 const MoviesPage = React.lazy(() => import("src/components/pages/movies"));
 const CastPage = React.lazy(() => import("src/components/pages/cast"));
 const TrailersPage = React.lazy(() => import("src/components/pages/trailers"));
 
-const withSuspense = (WrappedComponent: any) => {
+const withSuspense = (WrappedComponent: ComponentType) => {
   return (
     <Suspense>
       <WrappedComponent />
@@ -23,7 +25,7 @@ const withSuspense = (WrappedComponent: any) => {
   );
 };
 
-export const withSuspenseComponents = (element: any) => {
+export const withSuspenseComponents = (element: ReactElement) => {
   const newComponent = () => withSuspense(element.props.component);
 
   return { ...element, props: { ...element.props, component: newComponent } };
@@ -43,7 +45,7 @@ export default function Routing() {
             <Route
               key="OverviewPage"
               path={getOverviewPath()}
-              element={withSuspenseComponents(<OverviewPage />)}
+              element={withSuspenseComponents(<OverviewContainer />)}
             />
             <Route
               key="MoviesPage"
