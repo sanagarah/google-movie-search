@@ -1,10 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import SearchBox from "src/components/common/search-box";
-import Context from "src/hooks/context";
-import { getMovieIds } from "src/services/data-fetch";
+import MovieDetailsContext from "src/hooks/contexts/MovieDetailsContext";
+import MovieIdContext from "src/hooks/contexts/MovieIdContext";
+import { getMovieDetails, getMovieIds } from "src/services/data-fetch";
 
 export default function SearchBoxContainer() {
-  const { changeMoveId } = useContext(Context);
+  const { changeMovieId } = useContext(MovieIdContext);
+  const { changeMovieDetails } = useContext(MovieDetailsContext);
 
   const [searchText, setSearchText] = useState("");
 
@@ -25,7 +27,10 @@ export default function SearchBoxContainer() {
             moviesId.push(result[0].id);
           }
         }
-        changeMoveId(moviesId);
+        changeMovieId(moviesId);
+        getMovieDetails(result[0].id).then((details) => {
+          changeMovieDetails(details);
+        });
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

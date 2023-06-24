@@ -1,9 +1,10 @@
-import { categories, headerSideIcons } from "src/data/constants";
+import { categories, googleApps, headerSideIcons } from "src/data/constants";
 import Tooltip from "src/components/common/tooltip";
 import Chip from "src/components/common/chip";
 import Box from "src/components/common/box";
 import SearchBoxContainer from "src/components/containers/search-box-container";
 import { useTranslation } from "react-i18next";
+import Popover from "src/components/common/popover";
 
 const GoogleLogo = require("src/assets/images/google-logo.png");
 
@@ -20,7 +21,11 @@ export default function Header() {
         <div className="flex w-1/6 justify-between items-center px-3">
           {headerSideIcons.map((icons, index) => (
             <Tooltip key={index} text={icons.toolTipText} isSearchIcon={false}>
-              <div className="text-gray-400">{icons.icon}</div>
+              {index === 1 ? (
+                <Popover content={googleApps} button={icons.icon} />
+              ) : (
+                <div className="text-gray-400">{icons.icon}</div>
+              )}
             </Tooltip>
           ))}
         </div>
@@ -28,7 +33,7 @@ export default function Header() {
       <div className="flex justify-between items-center mt-4 ms-44">
         <div className="flex">
           {categories.map((category, index) => (
-            <Chip key={index} text={category} isSearchCategory={true} />
+            <Chip key={index} text={category.name} isSearchCategory={true} />
           ))}
         </div>
         <div>

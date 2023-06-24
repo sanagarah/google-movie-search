@@ -16,9 +16,10 @@
     "resultsNumber": "About 2,040,000,000 results (0.60 seconds)",
     "filmSeries": "Film Series"
   },
-  "overview": {
+  "titles": {
     "movies": "Movies",
-    "cast": "Cast"
+    "cast": "Cast",
+    "trailers": "Trailers & clips"
   },
   "tooltip": {
     "searchVoice": "Search by voice",
@@ -45,6 +46,10 @@
   },
   "buttons": {
     "seeMore": "See more  →",
+    "showMore": "Show more",
     "more": ", MORE"
+  },
+  "errors": {
+    "smallScreen": "Screen size not supported"
   }
 }

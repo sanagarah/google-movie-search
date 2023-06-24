@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { KeyboardEvent, useState } from "react";
 import { searchBoxIcons } from "src/data/constants";
 import Tooltip from "src/components/common/tooltip";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -26,6 +26,12 @@ export default function SearchBox({ handleSearch }: SearchBoxProps) {
     setSearchText(movieName);
   };
 
+  const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.code === "Enter") {
+      handleSearch(searchText);
+    }
+  };
+
   return (
     <div
       className={`flex justify-between items-center border border-gray-200 shadow-md rounded-full px-4 transition-all duration-500 ${
@@ -40,6 +46,7 @@ export default function SearchBox({ handleSearch }: SearchBoxProps) {
         value={searchText}
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
+        onKeyDown={handleKeyPress}
         onChange={(e) => handleInputChange(e.target.value)}
       />
       {searchBoxIcons.map((icon, index) => (

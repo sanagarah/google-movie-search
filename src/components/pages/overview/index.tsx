@@ -1,8 +1,8 @@
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import Card from "src/components/common/card";
 import { IoIosArrowForward } from "react-icons/io";
-import { useState } from "react";
 import { movieDetailsType, castDetailsType } from "src/data/types";
-import { useTranslation } from "react-i18next";
 interface OverviewProps {
   details: movieDetailsType[];
   cast: castDetailsType[];
@@ -22,7 +22,7 @@ export default function Overview({ details, cast }: OverviewProps) {
   return (
     <div>
       <h1 className="flex items-center gap-2 text-xl">
-        {t("overview.movies")}
+        {t("titles.movies")}
         <span>
           <IoIosArrowForward size={15} />
         </span>
@@ -34,12 +34,12 @@ export default function Overview({ details, cast }: OverviewProps) {
             small={false}
             path={moviesDetails?.poster_path}
             title={moviesDetails?.original_title}
-            subTitle={moviesDetails?.release_date.slice(0, 4)}
+            subTitle={moviesDetails?.release_date?.slice(0, 4)}
           />
         ))}
       </div>
       <h1 className="flex items-center gap-2 text-xl mt-16">
-        {t("overview.cast")}
+        {t("titles.cast")}
         <span>
           <IoIosArrowForward size={15} />
         </span>

@@ -32,44 +32,43 @@ export default function About({
   return (
     <div className="border-s border-gray-100 ps-4">
       <h1 className="text-lg">{t("about.title")}</h1>
-      {characters ? (
-        <NamesList title={t("about.characters")} list={characters} />
-      ) : (
-        <p>{t("about.emptyList")}</p>
-      )}
-      {productionCompanies ? (
-        <NamesList
-          title={t("about.productionCompanies")}
-          list={productionCompanies}
-        />
-      ) : (
-        <p>{t("about.emptyList")}</p>
-      )}
-      {directors ? (
-        <NamesList title={t("about.directors")} list={directors} />
-      ) : (
-        <p>{t("about.emptyList")}</p>
-      )}
+      <NamesList
+        title={t("about.characters")}
+        list={characters ? characters : []}
+      />
+      <NamesList
+        title={t("about.productionCompanies")}
+        list={productionCompanies ? productionCompanies : []}
+      />
+      <NamesList
+        title={t("about.directors")}
+        list={directors ? directors : []}
+      />
+
       <hr className="border border-gray-100 mt-10 mb-3" />
       <div className="flex flex-col mt-6">
-        <p>{t("about.recommendations")}</p>
-        <div className="flex flex-wrap overflow-y-scroll">
-          {recommendationsList?.map((recommendation, index) => (
-            <Card
-              small={true}
-              key={index}
-              path={recommendation?.poster_path}
-              title={recommendation.original_title}
-            />
-          ))}
-        </div>
-        {!showFullList && (
-          <button
-            className="bg-gray-200 py-2 rounded-full w-3/4 self-center"
-            onClick={handleRecommendationExpansion}
-          >
-            {t("buttons.seeMore")}
-          </button>
+        {recommendationsList && recommendationsList.length > 0 && (
+          <>
+            <p>{t("about.recommendations")}</p>
+            <div className="flex flex-wrap overflow-y-scroll">
+              {recommendationsList?.map((recommendation, index) => (
+                <Card
+                  small={true}
+                  key={index}
+                  path={recommendation?.poster_path}
+                  title={recommendation.original_title}
+                />
+              ))}
+            </div>
+            {!showFullList && (
+              <button
+                className="bg-gray-200 py-2 rounded-full w-3/4 self-center"
+                onClick={handleRecommendationExpansion}
+              >
+                {t("buttons.seeMore")}
+              </button>
+            )}
+          </>
         )}
       </div>
     </div>

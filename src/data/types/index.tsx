@@ -1,13 +1,8 @@
-export type movieInfoType = {
-  original_title: string;
-  poster_path: string;
-};
-
 export type movieDetailsType = {
   original_title: string;
   poster_path: string;
-  release_date: string;
-  homepage: string;
+  production_companies?: string[];
+  release_date?: string;
 };
 
 export type castDetailsType = {
@@ -20,4 +15,18 @@ export type castDetailsType = {
 export type recommendationsType = {
   original_title: string;
   poster_path: string;
+};
+
+export type trailersType = {
+  key: string;
+  name: string;
+  published_at: string;
+  site?: string;
+};
+
+export type googleAppType = {
+  id: string;
+  name: string;
+  link: string;
+  icon: any;
 };

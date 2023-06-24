@@ -1,17 +1,18 @@
 import { useContext, useEffect, useState } from "react";
 import About from "src/components/common/about";
+import { movieDetailsInitials } from "src/data/constants";
 import { recommendationsType } from "src/data/types";
-import Context from "src/hooks/context";
+import MovieDetailsContext from "src/hooks/contexts/MovieDetailsContext";
+import MovieIdContext from "src/hooks/contexts/MovieIdContext";
 import {
   getMovieCredits,
-  getMovieDetails,
   getMovieRecommendations,
 } from "src/services/data-fetch";
 
 export default function AboutContainer() {
-  const { movieId } = useContext(Context);
+  const { movieId } = useContext(MovieIdContext);
+  const { movieDetails } = useContext(MovieDetailsContext);
 
-  const [details, setDetails] = useState<string[]>();
   const [productionCompanies, setProductionCompanies] = useState<string[]>();
   const [characters, seCharacters] = useState<string[]>();
   const [directors, setDirectors] = useState<string[]>();
@@ -20,13 +21,10 @@ export default function AboutContainer() {
 
   useEffect(() => {
     if (movieId[0] !== 0) {
-      getMovieDetails(movieId[0]).then((details) => {
-        setDetails(details);
-        let productionCompanies = details.production_companies.map(
-          (company: Record<string, any>) => company.name
-        );
-        setProductionCompanies(productionCompanies);
-      });
+      let productionCompanies = movieDetails.production_companies?.map(
+        (company: Record<string, any>) => company.name
+      );
+      setProductionCompanies(productionCompanies);
 
       getMovieCredits(movieId[0]).then((credits) => {
         let characters = credits.cast.map(
@@ -44,11 +42,11 @@ export default function AboutContainer() {
         setRecommendations(recommendation.results);
       });
     }
-  }, [movieId]);
+  }, [movieId, movieDetails]);
 
   return (
     <div>
-      {details && (
+      {movieDetails !== movieDetailsInitials && (
         <About
           characters={characters}
           productionCompanies={productionCompanies}

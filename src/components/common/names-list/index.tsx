@@ -10,24 +10,34 @@ export default function NamesList({ title, list }: NamesListProps) {
 
   const [showFullList, setShowFullList] = useState(false);
 
-  const renderedList = showFullList ? list : list?.slice(0, 3);
+  const renderList = showFullList ? list : list?.slice(0, 3);
 
-  const handleMoreClick = () => {
+  const handleListExpansion = () => {
     setShowFullList(true);
   };
 
   return (
-    <div className="text-sm font-bold mt-6">
-      {title + " "}
-      {renderedList?.map((item, index) => (
-        <span key={index} className="text-blue-200 font-normal pe-1">
-          {item}
-        </span>
-      ))}
-      {!showFullList && list && list.length > 3 && (
+    <div className="flex text-sm font-bold mt-6">
+      <p className="pe-2">{`${title}:`}</p>
+      {renderList.length > 0 ? (
+        renderList.map((item, index) => (
+          <a
+            key={index}
+            className="text-blue-200 font-normal pe-1"
+            href={`https://www.google.com/search?q=${encodeURIComponent(item)}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {item}
+          </a>
+        ))
+      ) : (
+        <p>{t("about.emptyList")}</p>
+      )}
+      {!showFullList && list.length > 3 && (
         <span
           className="text-blue-200 font-normal cursor-pointer"
-          onClick={handleMoreClick}
+          onClick={handleListExpansion}
         >
           {t("buttons.more")}
         </span>

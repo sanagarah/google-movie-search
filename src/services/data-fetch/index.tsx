@@ -53,3 +53,16 @@ export const getMovieRecommendations = async (id: number) => {
   );
   return response.data;
 };
+
+export const getMovieTrailers = async (id: number) => {
+  const response = await axios.get(
+    `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`,
+    {
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        accept: "application/json",
+      },
+    }
+  );
+  return response.data;
+};
